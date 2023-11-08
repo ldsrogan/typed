@@ -1,0 +1,14 @@
+.webviewer-container {
+  display: flex;
+  align-items: center;
+  background-color: black;
+  width: 100%;
+  height: 100%;
+  .youtube-frame-wrapper {
+    display: flex;
+    aspect-ratio: 3/2;
+    width: 100%;
+    align-items: center;
+    background-color: black;
+  }
+}

@@ -1,0 +1,19 @@
+.url-input {
+  display: flex;
+  width: 100%;
+  outline: none;
+  border: 1px solid black;
+  &:focus,
+  &:active {
+    border-color: var(--blue-med);
+  }
+  &--error {
+    @extend .url-input;
+    border-color: var(--red-deep);
+
+    &:focus,
+    &:active {
+      border-color: var(--red-deep);
+    }
+  }
+}

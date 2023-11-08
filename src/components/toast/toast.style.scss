@@ -1,0 +1,56 @@
+@import '@/common/styles/z-index.scss';
+
+.toast-container {
+  position: absolute;
+  z-index: (toast);
+
+  border-radius: 8px;
+  border: 1px solid var(--green-med);
+  background-color: var(--green-light);
+  top: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  box-sizing: border-box;
+  padding: 16px 24px;
+  width: fit-content;
+  height: fit-content;
+  align-items: center;
+  gap: 12px;
+  box-shadow: 0px 20px 40px 0px rgba(19, 32, 57, 0.07);
+  animation: toast-animation 100ms ease-out;
+  pointer-events: all;
+
+  text-align: center;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px; /* 150% */
+
+  &-warn {
+    @extend .toast-container;
+    color: var(--gold-deep);
+    border-color: var(--gold-med);
+    background-color: var(--gold-light);
+  }
+  &-info {
+    @extend .toast-container;
+    color: var(--green-deep);
+    border-color: var(--green-med);
+    background-color: var(--green-light);
+  }
+  &-error {
+    @extend .toast-container;
+    color: var(--red-deep);
+    border-color: var(--red-med);
+    background-color: var(--red-light);
+  }
+}
+
+@keyframes toast-animation {
+  0% {
+    top: 0px;
+  }
+  100% {
+    top: 24px;
+  }
+}

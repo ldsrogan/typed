@@ -1,0 +1,19 @@
+$z-index: (
+  toast: 100,
+  dialog: 99,
+  global-menu: 98,
+  modal-background: 97,
+  current-indicator: 70,
+  menu: 40,
+  tooltip: 30,
+  foreground: 25,
+  base: 10,
+);
+
+@function z-index($key) {
+  @return map-get($z-index, $key);
+}
+
+@mixin z-index($key) {
+  z-index: z-index($key);
+}

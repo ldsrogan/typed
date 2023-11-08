@@ -1,0 +1,17 @@
+.sidebar-container {
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  width: 256px;
+  height: 100%;
+  box-sizing: border-box;
+  background-color: var(--gray-light);
+  box-shadow: -1px 0px 0px 0px #f0f0f0 inset;
+
+  .items-container {
+    display: flex;
+    padding: 8px;
+    flex-direction: column;
+    gap: 6px;
+  }
+}
