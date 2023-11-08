@@ -1,15 +1,26 @@
+@import '@/common/styles/z-index.scss';
+
 .home-container {
   display: flex;
   flex-direction: column;
   width: 100%;
   height: 100%;
+  gap: 2px;
   .title-bar {
     display: flex;
+    width: 100%;
+    flex-shrink: 0;
+    height: 42px;
     align-items: center;
     justify-content: space-between;
     box-sizing: border-box;
     padding: 5px;
     background-color: white;
+    font-size: 14px;
+    line-height: 22px;
+    box-shadow: rgba(40, 50, 93, 0.25) 0px 3px 28px -4px,
+      rgba(0, 0, 0, 0.3) 7px 7px 8px -10px;
+    z-index: (foreground);
   }
   .loading-wrapper {
     margin: auto;

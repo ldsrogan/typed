@@ -37,7 +37,10 @@
   --red-dark: #f76e84;
   --red-deep: #cf1736;
 }
-
+html {
+  height: 100%;
+  overflow: auto;
+}
 body {
   margin: 0;
   display: flex;

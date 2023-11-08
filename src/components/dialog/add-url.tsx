@@ -4,6 +4,7 @@ import useCheckOutside from '@/hooks/useCheckOutside';
 import { useRecoilState, useSetRecoilState } from 'recoil';
 import { itemId, itemList, selectedItem } from '@/recoil/item/atom';
 import { youtubeEmbeddedUrl } from '@/utilities/string-format';
+import useToast from '@/hooks/useToast';
 import TextBox from '@/components/textbox/textbox';
 import { isYoutube, validateUrl } from '@/utilities/validate';
 import { TListType } from '@/common/types';
@@ -20,6 +21,7 @@ export function AddUrlDialog({ onClose }: IAddUrlDialog) {
   const setSelectedItem = useSetRecoilState(selectedItem);
   const [id, setId] = useRecoilState(itemId);
   const [error, setError] = useState('');
+  const showToast = useToast();
 
   const handleAddUrl = (str: string) => {
     if (!validateUrl(str)) {
@@ -43,6 +45,7 @@ export function AddUrlDialog({ onClose }: IAddUrlDialog) {
       if (items.length === 0) {
         setSelectedItem(newItem);
       }
+      showToast('리소스가 추가되었습니다.', 'info');
       onClose();
     }
   };

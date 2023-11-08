@@ -13,6 +13,9 @@
     @extend .listitem-container;
     border: 1px solid var(--blue-med);
   }
+  &:hover {
+    cursor: pointer;
+  }
 
   .listitem-title {
     width: 100%;
