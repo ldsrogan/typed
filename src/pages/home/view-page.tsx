@@ -10,19 +10,22 @@ import './view-page.style.scss';
 
 export default function ViewPage() {
   const [item, setSelectedItem] = useRecoilState(selectedItem);
-  const [loading, setLoading] = useState(true);
-  const View = useAnimation('loading');
+  const [loading, setLoading] = useState(false);
+  const { refresh, showAnimation } = useAnimation('loading');
 
   useEffect(() => {
     if (item) {
       startTransition(() => {
         setLoading(true);
       });
-      setTimeout(() => {
-        setLoading(false);
-      }, 2000);
     }
   }, [item]);
+
+  useEffect(() => {
+    if (loading) {
+      refresh();
+    }
+  }, [loading]);
 
   return (
     <div className="home-container">
@@ -40,21 +43,21 @@ export default function ViewPage() {
           </Button>
         </div>
       )}
-      {loading ? (
-        <div className="loading-wrapper">{View} </div>
-      ) : (
-        item && (
-          <WebViewer
-            type={item.type}
-            src={item.src as string}
-            onLoaded={() => {
-              setLoading(false);
-            }}
-            onError={() => {
-              setLoading(false);
-            }}
-          />
-        )
+      {loading && <div className="loading-wrapper">{showAnimation()}</div>}
+      {item && (
+        <WebViewer
+          type={item.type}
+          src={item.src as string}
+          onLoaded={() => {
+            setLoading(false);
+          }}
+          onError={() => {
+            setLoading(false);
+          }}
+          onLoadStart={() => {
+            setLoading(true);
+          }}
+        />
       )}
 
       {/* <iframe

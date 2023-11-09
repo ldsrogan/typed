@@ -7,9 +7,16 @@ export interface IAppProps {
   src: string;
   onLoaded?: () => void;
   onError?: () => void;
+  onLoadStart?: () => void;
 }
 
-export default function WebViewer({ type, src, onLoaded, onError }: IAppProps) {
+export default function WebViewer({
+  type,
+  src,
+  onLoadStart,
+  onLoaded,
+  onError,
+}: IAppProps) {
   if (type === 'youtube') {
     return (
       <div className="webviewer-container">
@@ -39,10 +46,17 @@ export default function WebViewer({ type, src, onLoaded, onError }: IAppProps) {
       height="100%"
       src={src}
       title="embedded-frame"
+      onLoadStart={() => {
+        if (onLoadStart) {
+          onLoadStart();
+        }
+      }}
       onLoad={() => {
+        console.log('loaded');
         if (onLoaded) onLoaded();
       }}
       onError={() => {
+        console.log('loaded');
         if (onError) onError();
       }}
       frameBorder="0"

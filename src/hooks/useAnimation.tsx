@@ -1,25 +1,43 @@
-import { useMemo } from 'react';
+import { useEffect, useMemo } from 'react';
 import { TAnimation } from '@/common/types';
-import { useLottie } from 'lottie-react';
+import lottie from 'lottie-web';
 import loadingAnimation from '@/resources/animation/loading.json';
 
-import './useAnimation.style.scss';
-
 export default function useAnimation(type: TAnimation) {
-  const options = useMemo(() => {
-    let ops: any = {};
+  useEffect(() => {
+    const elem = document.querySelector('.animation-spot');
+    lottie.loadAnimation({
+      name: 'loading-animation',
+      container: elem as Element,
+      renderer: 'svg',
+      loop: true,
+      autoplay: true,
+      // eslint-disable-next-line global-require
+      animationData: loadingAnimation,
+    });
 
-    if (type === 'loading') {
-      ops = {
-        animationData: loadingAnimation,
-        loop: true,
-      };
-    }
-
-    return ops;
+    return () => {
+      lottie.destroy('loading-animation');
+    };
   }, [type]);
 
-  const { View } = useLottie(options);
+  const refresh = () => {
+    lottie.destroy('loading-animation');
+    const elem = document.querySelector('.animation-spot');
+    lottie.loadAnimation({
+      name: 'loading-animation',
+      container: elem as Element,
+      renderer: 'svg',
+      loop: true,
+      autoplay: true,
+      // eslint-disable-next-line global-require
+      animationData: loadingAnimation,
+    });
+  };
 
-  return <div className="animation-container">{View}</div>;
+  const showAnimation = () => {
+    return <div className="animation-spot" style={{ width: '250px' }} />;
+  };
+
+  return { refresh, showAnimation };
 }

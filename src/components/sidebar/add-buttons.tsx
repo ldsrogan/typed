@@ -1,4 +1,5 @@
 import Button from '@/components/button/button';
+import UploadFileButton from '@/components/upload-file/upload-file';
 import { AddUrlDialog } from '@/components/dialog/add-url';
 import { useState } from 'react';
 
@@ -26,14 +27,15 @@ export default function AddButtons() {
         >
           URL 추가
         </Button>
-        <Button
+
+        <UploadFileButton
           onClick={(e) => {
             e.stopPropagation();
             //
           }}
         >
           이미지 추가
-        </Button>
+        </UploadFileButton>
       </div>
     </>
   );

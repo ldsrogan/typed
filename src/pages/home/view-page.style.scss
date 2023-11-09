@@ -1,6 +1,7 @@
 @import '@/common/styles/z-index.scss';
 
 .home-container {
+  position: relative;
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -23,6 +24,11 @@
     z-index: (foreground);
   }
   .loading-wrapper {
-    margin: auto;
+    display: flex;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.221);
   }
 }

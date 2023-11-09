@@ -2,7 +2,7 @@ import { ButtonHTMLAttributes } from 'react';
 
 import './button.style.scss';
 
-interface IButton extends ButtonHTMLAttributes<HTMLButtonElement> {
+export interface IButton extends ButtonHTMLAttributes<HTMLButtonElement> {
   fitContent?: boolean;
   noBorder?: boolean;
 }

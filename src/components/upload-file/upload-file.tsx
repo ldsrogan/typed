@@ -1,13 +1,14 @@
-import { useState } from 'react';
+import React, { useRef } from 'react';
+import { useState, useCallback } from 'react';
+import Button, { IButton } from '@/components/button/button';
 import { supportedFiles } from '@/common/data';
-import React from 'react';
 
 import './upload-file.style.scss';
 
-export default function UploadFileButton() {
+export default function UploadFileButton(props: IButton) {
   const [imgSrcs, setImgSrcs] = useState<string[]>([]);
-
-  const handleFileAdded = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const ref = useRef<any>();
+  const handleFileAdded = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     const { files } = e.target;
     const filtered: File[] = [];
 
@@ -37,16 +38,27 @@ export default function UploadFileButton() {
       // reset target value for latter usage
       e.target.value = '';
     }
-  };
-
-  console.log(imgSrcs.length);
+  }, []);
 
   return (
     <>
       {imgSrcs.map((file) => (
         <img className="preview-thumbnail" src={file} alt="" />
       ))}
+      <Button
+        {...props}
+        onClick={(e) => {
+          e.stopPropagation();
+          if (ref.current) {
+            ref.current.click();
+          }
+        }}
+      >
+        {props.children}
+      </Button>
       <input
+        className="upload-button"
+        ref={ref}
         accept={supportedFiles.reduce(
           (prev: string, ext: string) => `${prev}, ${ext}`,
           '',
