@@ -45,7 +45,7 @@ type TListItem = {
 * `https://` 또는 `http://` scheme이 포함되도록 하기 위해 url  validate을 위한 Regular Expression을 통해 test했습니다. 만일 scheme에 맞지 않는 경우는 위와 같이 에러 메시지가 뜨고 리소스 등록이 되지 않도록 했습니다.
     * 개선할 사항이 있다면, scheme을 강제하는 것도 좋지만, `http://` 나 `https://` 가 없을 경우, 자동으로 붙도록 설정해 주는 것도 좋을거 같습니다. `placeholder`로 표기를 해 놓으면 User 입장에서도 잘 이해할 수 있을 거 같습니다.
 
-* Youtube 링크 등록시 Embeded 링크로 변환하는 부분은 youtube에서 링크 share시 크게 두가지 타입이 있는데 youtube.com 혹은 youtu.be 가 포함되고 뒤에 video id가 붙습니다. 이 두가지 경우를 처리해 넣어줬습니다.
+* Youtube 링크 등록시 Embeded 링크로 변환하는 부분은 youtube에서 링크 share시 크게 두가지 타입이 있는데 youtube.com 혹은 youtu.be 가 포함되고 뒤에 video id가 붙습니다. 이 두가지 경우를 처리해 넣어줬습니다. embeded 링크가 들어올 경우는 그대로 추가될 수 있게 했습니다.
     * 개선을 위해 Backend for Frontend까지 만들려고 했으나, 개인 시간이 부족하여 추가 구현은 하다 말았습니다. BFF를 사용해 Opengraph Metadata로 thumbnail과 기타 필요 정보들을 얻어 item에 넣을 수 있습니다. 또한, frontend에서 별도로 embedded data를 처리할 필요 없이 backend에서 어떤 형태의 링크든 meta정보를 받아올때 함께 오는 default url (using 'youtube.com' format always)을 사용한다면 좀 edge 케이스 없이 쉽게 embedded link로 전환할 수 있습니다. 또한, 깨진 링크는 사전에 확인이 가능해 등록 이전에 동작 여부를 사용자에게 알려줄수도 있었을 것입니다.
 
 **Image 리소스 추가**
@@ -80,8 +80,12 @@ type TListItem = {
 * Resource의 크기의 optimal 상태를 명확히 하기 어려워 `width`를 기준으로 사이즈 조절이 되도록 하였습니다.
 * 일부 사이트 (예: www.google.com)는 x-frame-options 가 `sameorigin`등으로 설정되어 iframe에서 접근이 어려운 상황인데 이는 backend 설정및 리라우팅을 `cors`와 마찬가지로 간단히 해결 가능합니다.
 * 리소스 리스트 추가적으로 파일인지 `url` 또는 `youtube link`인지에 대해 알수 있도록 아이콘과 text를 추가하였습니다.
+* 리소스 뷰 화면에서 리소스 타이틀과 close할 수 있는 버튼을 통해 리소스 뷰를 close할 수 있도록 구현했습니다.
 
 ![resource1](https://github.com/ldsrogan/images/assets/3027110/781b586f-dea6-44b1-8ca5-0fb1090f5209)
 ![resource2](https://github.com/ldsrogan/images/assets/3027110/72de6025-894c-491c-b534-245584f396f2)
 ![resource3](https://github.com/ldsrogan/images/assets/3027110/b238bf27-8d73-4965-aa30-bcbba7ddb745)
 
+### 그 외 개선할 점들
+* 개인적인 일정에 시간을 충분히 쓰지 못하고, 빠르게 구현하느라 중간 중간 comment를 충분히 남기지 못했습니다.
+* 테스트 코드를 함께 작성하려고 했는데, 시간이 충분히 못했습니다. 일반적으로는 테스트 코드를 작성해 UI의 기능이 제대로 구현 되었는지 확인합니다.
