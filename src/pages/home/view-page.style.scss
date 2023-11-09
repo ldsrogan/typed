@@ -6,7 +6,6 @@
   flex-direction: column;
   width: 100%;
   height: 100%;
-  gap: 2px;
   .title-bar {
     display: flex;
     width: 100%;
@@ -21,7 +20,7 @@
     line-height: 22px;
     box-shadow: rgba(40, 50, 93, 0.25) 0px 3px 28px -4px,
       rgba(0, 0, 0, 0.3) 7px 7px 8px -10px;
-    z-index: (foreground);
+    z-index: z-index(foreground);
   }
   .loading-wrapper {
     display: flex;
@@ -30,6 +29,5 @@
     justify-content: center;
     position: absolute;
     background-color: rgba(0, 0, 0, 0.221);
-    z-index: 0;
   }
 }
