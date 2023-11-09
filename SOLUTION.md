@@ -61,6 +61,7 @@ type TListItem = {
     * 해결을 위해 `url`은 뒤에 random param을 넣어 cache문제를 해결함
     * img 같은 경우는 dom 구조를 변경해야 했음
     * 최종적으로는, 현재 typed에서 사용하는 방식으로 item 정보에서 original 정보를 등록해 놓고 리소스 추가시 original data 값을 비교해 같은 정보일 경우 등록을 하지 못하도록 막음
+* `url` 등록을 위한 `dialog`가 외부를 마우스로 클릭할 시에 자연스레 닫힐 수 있도록 useCheckOutside라는 custom hook을 생성해 사용함
 
 
 ### 토스트
