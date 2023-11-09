@@ -1,25 +1,29 @@
 import { useEffect, useState, startTransition } from 'react';
 import useAnimation from '@/hooks/useAnimation';
-import { useRecoilState } from 'recoil';
-import { selectedItem } from '@/recoil/item/atom';
+import { useRecoilValue, useResetRecoilState } from 'recoil';
+import { selectedId } from '@/recoil/item/atom';
 import { TypedIcon } from 'typed-design-system';
 import WebViewer from '@/components/viewer/viewer';
 import Button from '@/components/button/button';
 
 import './view-page.style.scss';
+import { selectedItem } from '@/recoil/item/selector';
 
 export default function ViewPage() {
-  const [item, setSelectedItem] = useRecoilState(selectedItem);
+  const resetSelection = useResetRecoilState(selectedId);
+  const item = useRecoilValue(selectedItem);
   const [loading, setLoading] = useState(false);
   const { refresh, showAnimation } = useAnimation('loading');
 
   useEffect(() => {
-    if (item) {
+    if (item && item.id >= 0) {
       startTransition(() => {
         setLoading(true);
       });
+    } else {
+      setLoading(false);
     }
-  }, [item]);
+  }, [item?.id]);
 
   useEffect(() => {
     if (loading) {
@@ -36,7 +40,7 @@ export default function ViewPage() {
             noBorder
             fitContent
             onClick={() => {
-              setSelectedItem(null);
+              resetSelection();
             }}
           >
             <TypedIcon icon="close_19" />
@@ -49,6 +53,7 @@ export default function ViewPage() {
           type={item.type}
           src={item.src as string}
           onLoaded={() => {
+            console.log('here');
             setLoading(false);
           }}
           onError={() => {

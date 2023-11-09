@@ -7,6 +7,6 @@ export type TListType = 'youtube' | 'url' | 'img';
 export type TListItem = {
   id: number;
   title: string;
-  src: string | ArrayBuffer;
+  src: string;
   type: TListType;
 };

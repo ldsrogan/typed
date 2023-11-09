@@ -1,10 +1,11 @@
 import { useState } from 'react';
 import { TypedIcon } from 'typed-design-system';
 import useCheckOutside from '@/hooks/useCheckOutside';
-import { useRecoilState, useSetRecoilState } from 'recoil';
-import { itemId, itemList, selectedItem } from '@/recoil/item/atom';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { itemList, selectedId } from '@/recoil/item/atom';
 import { youtubeEmbeddedUrl } from '@/utilities/string-format';
 import useToast from '@/hooks/useToast';
+import useUpdateItems from '@/recoil/item/use-update-item';
 import TextBox from '@/components/textbox/textbox';
 import { isYoutube, validateUrl } from '@/utilities/validate';
 import { TListType } from '@/common/types';
@@ -17,9 +18,9 @@ interface IAddUrlDialog {
 
 export function AddUrlDialog({ onClose }: IAddUrlDialog) {
   const ref = useCheckOutside(onClose, 'add-url-btn');
-  const [items, setItems] = useRecoilState(itemList);
-  const setSelectedItem = useSetRecoilState(selectedItem);
-  const [id, setId] = useRecoilState(itemId);
+  const items = useRecoilValue(itemList);
+  const setSelectedId = useSetRecoilState(selectedId);
+  const { addItem } = useUpdateItems();
   const [error, setError] = useState('');
   const showToast = useToast();
 
@@ -28,8 +29,6 @@ export function AddUrlDialog({ onClose }: IAddUrlDialog) {
       setError('올바른 형식의 URL을 입력하세요');
     } else {
       setError('');
-      const curId = id;
-      setId(curId + 1);
 
       let type = 'url' as TListType;
       let parsedUrl = str;
@@ -38,12 +37,9 @@ export function AddUrlDialog({ onClose }: IAddUrlDialog) {
         parsedUrl = youtubeEmbeddedUrl(str);
       }
 
-      const newItem = { id: curId, title: str, src: parsedUrl, type };
-      setItems((prev) => {
-        return [newItem, ...prev];
-      });
+      const addedItem = addItem({ title: str, src: parsedUrl, type });
       if (items.length === 0) {
-        setSelectedItem(newItem);
+        setSelectedId(addedItem.id);
       }
       showToast('리소스가 추가되었습니다.', 'info');
       onClose();

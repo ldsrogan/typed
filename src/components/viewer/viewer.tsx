@@ -17,6 +17,10 @@ export default function WebViewer({
   onLoaded,
   onError,
 }: IAppProps) {
+  if (type === 'img') {
+    return <img className="img-container" src={src} alt="" />;
+  }
+
   if (type === 'youtube') {
     return (
       <div className="webviewer-container">
@@ -24,7 +28,7 @@ export default function WebViewer({
           <iframe
             width="100%"
             height="100%"
-            src={src}
+            src={`${src}?${Math.random()}`}
             title="embedded-frame"
             onLoad={() => {
               if (onLoaded) onLoaded();
@@ -44,7 +48,7 @@ export default function WebViewer({
     <iframe
       width="100%"
       height="100%"
-      src={src}
+      src={`${src}?${Math.random()}`}
       title="embedded-frame"
       onLoadStart={() => {
         if (onLoadStart) {
@@ -52,11 +56,9 @@ export default function WebViewer({
         }
       }}
       onLoad={() => {
-        console.log('loaded');
         if (onLoaded) onLoaded();
       }}
       onError={() => {
-        console.log('loaded');
         if (onError) onError();
       }}
       frameBorder="0"

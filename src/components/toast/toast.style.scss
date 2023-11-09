@@ -2,7 +2,7 @@
 
 .toast-container {
   position: absolute;
-  z-index: (toast);
+  z-index: z-index(toast);
 
   border-radius: 8px;
   border: 1px solid var(--green-med);

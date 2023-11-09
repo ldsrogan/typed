@@ -1,18 +1,13 @@
-import { selector, selectorFamily } from 'recoil';
-import { itemId, itemList } from './atom';
+import { selector } from 'recoil';
+import { itemList, selectedId } from './atom';
 import { TListItem } from '@/common/types';
 
-interface Param extends TListItem {
-  [key: string]: any;
-}
-
-export const itemFromList = selectorFamily<TListItem | null, Param>({
+export const selectedItem = selector<TListItem | null>({
   key: '@item/selector/item',
-  get:
-    (item) =>
-    ({ get }) => {
-      const items = get(itemList);
-      const found = items.find((it) => it.id === item.id);
-      return found || null;
-    },
+  get: ({ get }) => {
+    const items = get(itemList);
+    const selected = get(selectedId);
+    const found = items.find((it) => it.id === selected);
+    return found || null;
+  },
 });

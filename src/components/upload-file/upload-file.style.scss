@@ -1,14 +1,3 @@
-.preview-thumbnail {
-  display: flex;
-  flex-shrink: 0;
-  max-width: 312px;
-  max-height: 200px;
-  aspect-ratio: 3 /2;
-  border-radius: 12px;
-  object-fit: fill;
-  background-size: contain !important;
-}
-
 .upload-button {
   display: none;
 }

@@ -3,8 +3,8 @@ import { TypedIcon } from 'typed-design-system';
 import { useSetRecoilState } from 'recoil';
 import TextBox from '@/components/textbox/textbox';
 import { TListItem, TListType } from '@/common/types';
+import { itemList, selectedId } from '@/recoil/item/atom';
 import Button from '@/components/button/button';
-import { itemList, selectedItem } from '@/recoil/item/atom';
 
 import './list-item.style.scss';
 
@@ -20,7 +20,7 @@ const ListItem = ({ id, title, src, type, active }: IListItem) => {
   const [edit, setEdit] = useState(false);
   const [tempTitle, setTempTitle] = useState<string>('');
   const setItems = useSetRecoilState(itemList);
-  const setSelect = useSetRecoilState(selectedItem);
+  const setSelectedId = useSetRecoilState(selectedId);
 
   useEffect(() => {
     setTempTitle(title);
@@ -32,7 +32,7 @@ const ListItem = ({ id, title, src, type, active }: IListItem) => {
       role="none"
       onClick={(e) => {
         e.stopPropagation();
-        setSelect({ id, title, src, type });
+        setSelectedId(id);
       }}
     >
       {!edit ? (

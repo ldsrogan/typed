@@ -1,5 +1,7 @@
 import React, { useRef } from 'react';
 import { useState, useCallback } from 'react';
+import { useSetRecoilState } from 'recoil';
+import { itemList } from '@/recoil/item/atom';
 import Button, { IButton } from '@/components/button/button';
 import { supportedFiles } from '@/common/data';
 
@@ -8,6 +10,8 @@ import './upload-file.style.scss';
 export default function UploadFileButton(props: IButton) {
   const [imgSrcs, setImgSrcs] = useState<string[]>([]);
   const ref = useRef<any>();
+  const setitemList = useSetRecoilState(itemList);
+
   const handleFileAdded = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     const { files } = e.target;
     const filtered: File[] = [];
@@ -42,9 +46,6 @@ export default function UploadFileButton(props: IButton) {
 
   return (
     <>
-      {imgSrcs.map((file) => (
-        <img className="preview-thumbnail" src={file} alt="" />
-      ))}
       <Button
         {...props}
         onClick={(e) => {

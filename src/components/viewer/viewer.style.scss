@@ -6,9 +6,19 @@
   height: 100%;
   .youtube-frame-wrapper {
     display: flex;
-    aspect-ratio: 3/2;
+    aspect-ratio: 3 / 2;
     width: 100%;
     align-items: center;
     background-color: black;
   }
+}
+
+.img-container {
+  display: flex;
+  flex-shrink: 0;
+  width: 100%;
+  aspect-ratio: 3 / 2;
+  border-radius: 12px;
+  object-fit: fill;
+  background-size: contain !important;
 }
