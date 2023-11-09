@@ -1,4 +1,4 @@
-import { useEffect, useMemo } from 'react';
+import { useCallback, useEffect } from 'react';
 import { TAnimation } from '@/common/types';
 import lottie from 'lottie-web';
 import loadingAnimation from '@/resources/animation/loading.json';
@@ -21,7 +21,7 @@ export default function useAnimation(type: TAnimation) {
     };
   }, [type]);
 
-  const refresh = () => {
+  const refresh = useCallback(() => {
     lottie.destroy('loading-animation');
     const elem = document.querySelector('.animation-spot');
     lottie.loadAnimation({
@@ -33,7 +33,7 @@ export default function useAnimation(type: TAnimation) {
       // eslint-disable-next-line global-require
       animationData: loadingAnimation,
     });
-  };
+  }, []);
 
   const showAnimation = () => {
     return <div className="animation-spot" style={{ width: '250px' }} />;

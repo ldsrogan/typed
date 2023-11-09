@@ -1,4 +1,4 @@
-import { useEffect, MouseEvent, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 
 const useCheckOutside = (clickOutside: () => void, exceptId?: string) => {
   const ref = useRef<any>();

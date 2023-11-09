@@ -11,7 +11,7 @@ import './list-item.style.scss';
 export interface IListItem {
   id: number;
   title: string;
-  src: string | ArrayBuffer;
+  src: string;
   type: TListType;
   active?: boolean;
 }
@@ -59,29 +59,43 @@ const ListItem = ({ id, title, src, type, active }: IListItem) => {
           }}
         />
       )}
-      <div className="listitem-buttons">
-        <Button
-          fitContent
-          noBorder
-          onClick={(e) => {
-            e.stopPropagation();
-            setEdit(true);
-          }}
-        >
-          <TypedIcon className="listitem-button" icon="edit_19" />
-        </Button>
-        <Button
-          fitContent
-          noBorder
-          onClick={(e) => {
-            e.stopPropagation();
-            setItems((prev) => {
-              return prev.filter((pv) => pv.id !== id);
-            });
-          }}
-        >
-          <TypedIcon className="listitem-button" icon="trash_19" />
-        </Button>
+      <div className="listitem-footer">
+        <div className="listitem-footer-wrapper">
+          <div className="item-type-wrapper">
+            <TypedIcon
+              className="item-type-icon"
+              icon={type === 'url' || type === 'youtube' ? 'url' : 'file'}
+            />
+          </div>
+          <div className="listitem-type-text ">
+            {type === 'url' || type === 'youtube' ? src : 'file'}
+          </div>
+        </div>
+
+        <div className="listitem-buttons">
+          <Button
+            fitContent
+            noBorder
+            onClick={(e) => {
+              e.stopPropagation();
+              setEdit(true);
+            }}
+          >
+            <TypedIcon className="listitem-button" icon="edit_19" />
+          </Button>
+          <Button
+            fitContent
+            noBorder
+            onClick={(e) => {
+              e.stopPropagation();
+              setItems((prev) => {
+                return prev.filter((pv) => pv.id !== id);
+              });
+            }}
+          >
+            <TypedIcon className="listitem-button" icon="trash_19" />
+          </Button>
+        </div>
       </div>
     </div>
   );

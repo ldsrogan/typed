@@ -36,7 +36,9 @@ export default function UploadFileButton(props: IButton) {
           src: reader.result as string,
         })
       ) {
-        showToast('Resource already exist', 'error');
+        showToast('Some resource already exist', 'warn');
+      } else {
+        showToast('Successfully added resource', 'info');
       }
     };
     reader.onerror = () => {
