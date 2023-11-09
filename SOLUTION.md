@@ -81,3 +81,7 @@ type TListItem = {
 * 일부 사이트 (예: www.google.com)는 x-frame-options 가 `sameorigin`등으로 설정되어 iframe에서 접근이 어려운 상황인데 이는 backend 설정및 리라우팅을 `cors`와 마찬가지로 간단히 해결 가능합니다.
 * 리소스 리스트 추가적으로 파일인지 `url` 또는 `youtube link`인지에 대해 알수 있도록 아이콘과 text를 추가하였습니다.
 
+![resource1](https://github.com/ldsrogan/images/assets/3027110/781b586f-dea6-44b1-8ca5-0fb1090f5209)
+![resource2](https://github.com/ldsrogan/images/assets/3027110/72de6025-894c-491c-b534-245584f396f2)
+![resource3](https://github.com/ldsrogan/images/assets/3027110/b238bf27-8d73-4965-aa30-bcbba7ddb745)
+
