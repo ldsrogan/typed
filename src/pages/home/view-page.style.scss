@@ -16,11 +16,24 @@
     box-sizing: border-box;
     padding: 5px;
     background-color: white;
-    font-size: 14px;
-    line-height: 22px;
     box-shadow: rgba(40, 50, 93, 0.25) 0px 3px 28px -4px,
       rgba(0, 0, 0, 0.3) 7px 7px 8px -10px;
     z-index: z-index(foreground);
+
+    .resource-title-text {
+      width: 100%;
+      font-size: 14px;
+      line-height: 22px;
+      color: var(--gray-deep);
+      word-break: break-all;
+      overflow: hidden;
+      white-space: normal;
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      text-overflow: ellipsis;
+      text-align: left;
+      -webkit-line-clamp: 1;
+    }
   }
   .loading-wrapper {
     display: flex;

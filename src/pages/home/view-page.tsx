@@ -37,7 +37,7 @@ export default function ViewPage() {
     <div className="home-container">
       {item && (
         <div className="title-bar">
-          <div>{item.title} </div>
+          <div className="resource-title-text">{item.title} </div>
           <Button
             noBorder
             fitContent
