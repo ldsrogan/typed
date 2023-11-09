@@ -5,12 +5,13 @@ class ID {
   }
 
   getId = () => {
-    return this.id++;
+    return this.id++; // whenever the item request the id, the id will be increated
   };
 }
 
 let itemId: ID;
 
+// expose only the function that calls current id (singleton)
 const nextId = () => {
   if (!itemId) {
     itemId = new ID();

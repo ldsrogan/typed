@@ -7,6 +7,7 @@ import Toast from './components/toast/toast';
 
 import './App.scss';
 
+// this app component defines the global layout including sidebar and view page
 function App() {
   const toast = useRecoilValue(toastState);
   return (

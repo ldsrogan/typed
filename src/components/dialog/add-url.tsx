@@ -33,7 +33,7 @@ export function AddUrlDialog({ onClose }: IAddUrlDialog) {
         parsedUrl = youtubeEmbeddedUrl(str);
       }
 
-      if (addItem({ title: str, src: parsedUrl, origin: parsedUrl, type })) {
+      if (addItem({ title: str, src: parsedUrl, type })) {
         showToast('Successfully added your resource', 'info');
       } else {
         showToast(

@@ -12,6 +12,7 @@ export default function UploadFileButton(props: IButton) {
   const { addItem } = useUpdateItems();
   const showToast = useToast();
 
+  // handling the input image files
   const handleFileAdded = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     const { files } = e.target;
 
@@ -25,6 +26,7 @@ export default function UploadFileButton(props: IButton) {
     }
   }, []);
 
+  // using closure to hold the file info during the async call
   const loadFiles = (file: File) => {
     const reader = new FileReader();
     reader.onloadend = () => {
@@ -32,7 +34,6 @@ export default function UploadFileButton(props: IButton) {
         !addItem({
           title: file.name,
           type: 'img',
-          origin: reader.result as string,
           src: reader.result as string,
         })
       ) {
@@ -49,7 +50,7 @@ export default function UploadFileButton(props: IButton) {
 
   return (
     <>
-      <Button
+      <Button // actual UI model that calls the file input
         {...props}
         onClick={(e) => {
           e.stopPropagation();
@@ -60,9 +61,10 @@ export default function UploadFileButton(props: IButton) {
       >
         {props.children}
       </Button>
-      <input
+      <input // hidden element which only provide the function
         className="upload-button"
         ref={ref}
+        // we only accept *.jpg, and *.png files
         accept={supportedFiles.reduce(
           (prev: string, ext: string) => `${prev}, ${ext}`,
           '',

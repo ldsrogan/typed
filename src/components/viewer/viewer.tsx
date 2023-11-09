@@ -1,84 +1,25 @@
-import { TListType } from '@/common/types';
+import { IViewer } from './interface';
+
+import ImageViewer from './image-viewer';
+import YoutubeViewer from './youtube-viewer';
 
 import './viewer.style.scss';
 
-export interface IAppProps {
-  type: TListType;
-  src: string;
-  onLoaded?: () => void;
-  onError?: () => void;
-  onLoadStart?: () => void;
-}
+// this viewer handles all types including youtube url, url, and img.
 
-export default function WebViewer({
-  type,
-  src,
-  onLoadStart,
-  onLoaded,
-  onError,
-}: IAppProps) {
+export default function WebViewer(props: IViewer) {
+  const { type } = props;
+
+  // image viewr
   if (type === 'img') {
-    return (
-      <div className="img-wrapper">
-        <img
-          id={`${Math.random()}`}
-          className="img-container"
-          src={src}
-          alt=""
-          onLoad={() => {
-            if (onLoaded) onLoaded();
-          }}
-          onError={() => {
-            if (onError) onError();
-          }}
-        />
-      </div>
-    );
+    return <ImageViewer {...props} />;
   }
 
+  // youtube viewer
   if (type === 'youtube') {
-    return (
-      <div className="webviewer-container">
-        <div className="youtube-frame-wrapper">
-          <iframe
-            id="resource-viewer"
-            width="100%"
-            height="100%"
-            src={`${src}?${Math.random()}`} // to handle the same source cache
-            title="embedded-frame"
-            onLoad={() => {
-              if (onLoaded) onLoaded();
-            }}
-            onError={() => {
-              if (onError) onError();
-            }}
-            frameBorder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
-          />
-        </div>
-      </div>
-    );
+    return <YoutubeViewer {...props} />;
   }
-  return (
-    <iframe
-      width="100%"
-      height="100%"
-      src={`${src}?${Math.random()}`}
-      title="embedded-frame"
-      onLoadStart={() => {
-        if (onLoadStart) {
-          onLoadStart();
-        }
-      }}
-      onLoad={() => {
-        if (onLoaded) onLoaded();
-      }}
-      onError={() => {
-        console.log('error');
-        if (onError) onError();
-      }}
-      frameBorder="0"
-    />
-  );
+
+  // url viewer
+  return <WebViewer {...props} />;
 }
