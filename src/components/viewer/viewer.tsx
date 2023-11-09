@@ -2,10 +2,11 @@ import { IViewer } from './interface';
 
 import ImageViewer from './image-viewer';
 import YoutubeViewer from './youtube-viewer';
+import WebViewer from './web-viewer';
 
 // this viewer handles all types including youtube url, url, and img.
 
-export default function WebViewer(props: IViewer) {
+export default function Viewer(props: IViewer) {
   const { type } = props;
 
   // image viewr
