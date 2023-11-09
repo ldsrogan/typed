@@ -25,10 +25,9 @@ type TListType = 'youtube' | 'url' | 'img';
 
 type TListItem = {
    id: number; // item id
-  origin: string; // original data
-  title: string; // title
-  src: string; // resouce url or binary image data
-  type: TListType; // resource type
+   title: string; // title
+   src: string; // resouce url or binary image data
+   type: TListType; // resource type
 };
 
 ```
@@ -90,3 +89,4 @@ type TListItem = {
 ### 그 외 개선할 점들
 * 개인적인 일정에 시간을 충분히 쓰지 못하고, 빠르게 구현하느라 중간 중간 comment를 충분히 남기지 못했습니다.
 * 테스트 코드를 함께 작성하려고 했는데, 시간이 충분히 못했습니다. 일반적으로는 테스트 코드를 작성해 UI의 기능이 제대로 구현 되었는지 확인합니다.
+* code splitting을 통해 가능한 하나의 컴포넌트가 독립적인 로직을 포함하도록 하였는데, 서둘러 개발하다보니 온전히 처리하지 못한거 같습니다. 일부 필요시 불려야할 dependency가 있는 컴포넌트들은 lazy loading 등으로 수정하면 `rendering` 개선에 도움을 줄 수 있습니다. 
