@@ -49,7 +49,9 @@ const ListItem = ({ id, title, src, type, active }: IListItem) => {
               if (found) {
                 const dup: TListItem = { ...found, title: res };
 
-                return [...prev.filter((pv) => pv.id !== id), dup];
+                return [...prev.filter((pv) => pv.id !== id), dup].sort(
+                  (b, a) => a.id - b.id,
+                );
               }
               return prev;
             });
