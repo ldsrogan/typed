@@ -1,19 +1,21 @@
 import { useEffect, useState, startTransition } from 'react';
 import useAnimation from '@/hooks/useAnimation';
 import { useRecoilValue, useResetRecoilState } from 'recoil';
+import { selectedItem } from '@/recoil/item/selector';
+import useToast from '@/hooks/useToast';
 import { selectedId } from '@/recoil/item/atom';
 import { TypedIcon } from 'typed-design-system';
 import WebViewer from '@/components/viewer/viewer';
 import Button from '@/components/button/button';
 
 import './view-page.style.scss';
-import { selectedItem } from '@/recoil/item/selector';
 
 export default function ViewPage() {
   const resetSelection = useResetRecoilState(selectedId);
   const item = useRecoilValue(selectedItem);
   const [loading, setLoading] = useState(false);
   const { refresh, showAnimation } = useAnimation('loading');
+  const showToast = useToast();
 
   useEffect(() => {
     if (item && item.id >= 0) {
@@ -57,6 +59,7 @@ export default function ViewPage() {
           }}
           onError={() => {
             setLoading(false);
+            showToast('Failed to load resource! Recoure may be corrupted.', 'error');
           }}
           onLoadStart={() => {
             setLoading(true);

@@ -3,7 +3,7 @@ import { TypedIcon } from 'typed-design-system';
 import useCheckOutside from '@/hooks/useCheckOutside';
 import { youtubeEmbeddedUrl } from '@/utilities/string-format';
 import useToast from '@/hooks/useToast';
-import useUpdateItems from '@/recoil/item/use-update-item';
+import useUpdateItems from '@/recoil/item/useUpdateItem';
 import TextBox from '@/components/textbox/textbox';
 import { isYoutube, validateUrl } from '@/utilities/validate';
 import { TListType } from '@/common/types';
@@ -33,9 +33,15 @@ export function AddUrlDialog({ onClose }: IAddUrlDialog) {
         parsedUrl = youtubeEmbeddedUrl(str);
       }
 
-      addItem({ title: str, src: parsedUrl, type });
+      if (addItem({ title: str, src: parsedUrl, origin: parsedUrl, type })) {
+        showToast('Successfully added your resource', 'info');
+      } else {
+        showToast(
+          'Failed to add your resource. The resource already exists in the list.',
+          'error',
+        );
+      }
 
-      showToast('리소스가 추가되었습니다.', 'info');
       onClose();
     }
   };

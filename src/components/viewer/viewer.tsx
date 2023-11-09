@@ -21,6 +21,7 @@ export default function WebViewer({
     return (
       <div className="img-wrapper">
         <img
+          id={`${Math.random()}`}
           className="img-container"
           src={src}
           alt=""

@@ -29,5 +29,6 @@
     justify-content: center;
     position: absolute;
     background-color: rgba(0, 0, 0, 0.221);
+    z-index: z-index(foreground);
   }
 }

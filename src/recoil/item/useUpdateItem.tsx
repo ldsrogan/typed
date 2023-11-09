@@ -13,14 +13,26 @@ export default function useUpdateItems() {
     (newItem: Omit<TListItem, 'id'>) => {
       const curId = nextId();
       const itemWithId = { ...newItem, id: curId };
+      let len = 0;
+
+      let success = true;
+
       setItems((prev) => {
+        len = prev.length;
+
+        if (prev.find((pv) => pv.origin === newItem.origin)) {
+          success = false;
+          return prev;
+        }
+
         return [itemWithId, ...prev];
       });
 
-      if (items.length === 0) {
+      if (len === 0) {
         setSelectedId(curId);
       }
-      console.log(curId);
+
+      return success;
     },
     [items],
   );
