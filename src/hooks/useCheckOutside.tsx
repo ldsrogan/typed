@@ -3,6 +3,7 @@ import { useEffect, useRef } from 'react';
 // reusable custom hook to check if the mouse clicking outside of the current target.
 const useCheckOutside = (clickOutside: () => void, exceptId?: string) => {
   const ref = useRef<any>();
+
   useEffect(() => {
     const checkOutsideClick = (event: any) => {
       if (
@@ -17,7 +18,7 @@ const useCheckOutside = (clickOutside: () => void, exceptId?: string) => {
     return () => {
       document.removeEventListener('mousedown', checkOutsideClick);
     };
-  }, [ref]);
+  }, [ref, clickOutside]);
 
   return ref;
 };
