@@ -53,7 +53,6 @@ export default function ViewPage() {
           type={item.type}
           src={item.src as string}
           onLoaded={() => {
-            console.log('here');
             setLoading(false);
           }}
           onError={() => {
@@ -64,16 +63,6 @@ export default function ViewPage() {
           }}
         />
       )}
-
-      {/* <iframe
-        width="100%"
-        height="100%"
-        src="https://www.robinwieruch.de/react-libraries/"
-        title="embedded-frame"
-        frameBorder="0"
-        // allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        // allowFullScreen
-      /> */}
     </div>
   );
 }

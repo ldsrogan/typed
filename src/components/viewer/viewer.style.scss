@@ -19,12 +19,24 @@
   }
 }
 
-.img-container {
+.img-wrapper {
+  position: relative;
   display: flex;
-  flex-shrink: 0;
   width: 100%;
-  aspect-ratio: 3 / 2;
-  border-radius: 12px;
-  object-fit: fill;
-  background-size: contain !important;
+  height: 100%;
+  overflow: hidden;
+
+  .img-container {
+    position: absolute;
+    display: flex;
+    flex-shrink: 0;
+    border-radius: 12px;
+    object-fit: fill;
+    background-size: contain !important;
+
+    width: 50%;
+    top: 50%;
+    right: 50%;
+    transform: translate(50%, -50%);
+  }
 }

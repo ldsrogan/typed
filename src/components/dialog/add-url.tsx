@@ -1,8 +1,6 @@
 import { useState } from 'react';
 import { TypedIcon } from 'typed-design-system';
 import useCheckOutside from '@/hooks/useCheckOutside';
-import { useRecoilValue, useSetRecoilState } from 'recoil';
-import { itemList, selectedId } from '@/recoil/item/atom';
 import { youtubeEmbeddedUrl } from '@/utilities/string-format';
 import useToast from '@/hooks/useToast';
 import useUpdateItems from '@/recoil/item/use-update-item';
@@ -18,8 +16,6 @@ interface IAddUrlDialog {
 
 export function AddUrlDialog({ onClose }: IAddUrlDialog) {
   const ref = useCheckOutside(onClose, 'add-url-btn');
-  const items = useRecoilValue(itemList);
-  const setSelectedId = useSetRecoilState(selectedId);
   const { addItem } = useUpdateItems();
   const [error, setError] = useState('');
   const showToast = useToast();
@@ -37,10 +33,8 @@ export function AddUrlDialog({ onClose }: IAddUrlDialog) {
         parsedUrl = youtubeEmbeddedUrl(str);
       }
 
-      const addedItem = addItem({ title: str, src: parsedUrl, type });
-      if (items.length === 0) {
-        setSelectedId(addedItem.id);
-      }
+      addItem({ title: str, src: parsedUrl, type });
+
       showToast('리소스가 추가되었습니다.', 'info');
       onClose();
     }

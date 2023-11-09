@@ -1,16 +1,14 @@
 import React, { useRef } from 'react';
-import { useState, useCallback } from 'react';
-import { useSetRecoilState } from 'recoil';
-import { itemList } from '@/recoil/item/atom';
+import { useCallback } from 'react';
+import useUpdateItems from '@/recoil/item/use-update-item';
 import Button, { IButton } from '@/components/button/button';
 import { supportedFiles } from '@/common/data';
 
 import './upload-file.style.scss';
 
 export default function UploadFileButton(props: IButton) {
-  const [imgSrcs, setImgSrcs] = useState<string[]>([]);
   const ref = useRef<any>();
-  const setitemList = useSetRecoilState(itemList);
+  const { addItem } = useUpdateItems();
 
   const handleFileAdded = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     const { files } = e.target;
@@ -31,18 +29,21 @@ export default function UploadFileButton(props: IButton) {
       // }
 
       for (let i = 0; i < files.length; i++) {
-        const reader = new FileReader();
-
-        reader.onloadend = () => {
-          setImgSrcs((prev) => [...prev, reader.result as string]);
-        };
-        reader.readAsDataURL(files[i]);
+        loadFiles(files[i]);
       }
 
       // reset target value for latter usage
       e.target.value = '';
     }
   }, []);
+
+  const loadFiles = (file: File) => {
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      addItem({ title: file.name, type: 'img', src: reader.result as string });
+    };
+    reader.readAsDataURL(file);
+  };
 
   return (
     <>

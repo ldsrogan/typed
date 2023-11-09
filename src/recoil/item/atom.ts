@@ -6,11 +6,6 @@ export const itemList = atom<TListItem[]>({
   default: [],
 });
 
-export const itemId = atom<number>({
-  key: '@item/id',
-  default: 1,
-});
-
 export const selectedId = atom<number>({
   key: '@item/selectedItemId',
   default: -1,

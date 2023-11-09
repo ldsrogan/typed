@@ -1,20 +1,29 @@
 import { useRecoilState, useSetRecoilState } from 'recoil';
-import { itemId, itemList } from './atom';
+import nextId from '@/common/itemid';
+
+import { useCallback } from 'react';
+import { itemList, selectedId } from './atom';
 import { TListItem } from '@/common/types';
 
 export default function useUpdateItems() {
-  const setItems = useSetRecoilState(itemList);
-  const [curId, setNextId] = useRecoilState(itemId);
+  const [items, setItems] = useRecoilState(itemList);
+  const setSelectedId = useSetRecoilState(selectedId);
 
-  const addItem = (newItem: Omit<TListItem, 'id'>) => {
-    const itemWithId = { ...newItem, id: curId };
-    setItems((prev) => {
-      return [itemWithId, ...prev];
-    });
-    setNextId(curId + 1);
+  const addItem = useCallback(
+    (newItem: Omit<TListItem, 'id'>) => {
+      const curId = nextId();
+      const itemWithId = { ...newItem, id: curId };
+      setItems((prev) => {
+        return [itemWithId, ...prev];
+      });
 
-    return itemWithId;
-  };
+      if (items.length === 0) {
+        setSelectedId(curId);
+      }
+      console.log(curId);
+    },
+    [items],
+  );
 
   return { addItem };
 }

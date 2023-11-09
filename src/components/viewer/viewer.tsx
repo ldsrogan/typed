@@ -18,7 +18,21 @@ export default function WebViewer({
   onError,
 }: IAppProps) {
   if (type === 'img') {
-    return <img className="img-container" src={src} alt="" />;
+    return (
+      <div className="img-wrapper">
+        <img
+          className="img-container"
+          src={src}
+          alt=""
+          onLoad={() => {
+            if (onLoaded) onLoaded();
+          }}
+          onError={() => {
+            if (onError) onError();
+          }}
+        />
+      </div>
+    );
   }
 
   if (type === 'youtube') {
