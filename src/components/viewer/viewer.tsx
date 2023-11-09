@@ -26,9 +26,10 @@ export default function WebViewer({
       <div className="webviewer-container">
         <div className="youtube-frame-wrapper">
           <iframe
+            id="resource-viewer"
             width="100%"
             height="100%"
-            src={`${src}?${Math.random()}`}
+            src={`${src}?${Math.random()}`} // to handle the same source cache
             title="embedded-frame"
             onLoad={() => {
               if (onLoaded) onLoaded();
