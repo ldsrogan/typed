@@ -1,4 +1,4 @@
-# Typed ResourceList
+# Resource List
 
 ## Tech Stack
 
